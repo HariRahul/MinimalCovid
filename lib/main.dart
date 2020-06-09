@@ -151,7 +151,7 @@ class _jsonifyState extends State<jsonify> {
                                   FittedBox(
                                     fit: BoxFit.contain,
                                     child: Container(
-                                      margin: EdgeInsets.only(bottom: 20.0),
+                                      margin: EdgeInsets.only(bottom: 18.0),
                                       child: ShowUpAnimation(
                                         delayStart: Duration(seconds: 2),
                                         animationDuration: Duration(seconds: 3),
