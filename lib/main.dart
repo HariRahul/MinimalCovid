@@ -162,7 +162,7 @@ class _jsonifyState extends State<jsonify> {
                                           b,
                                           style: TextStyle(
                                             fontSize: 50.0,
-                                            color: Colors.orangeAccent,
+                                            color: Colors.orange,
                                           ),
                                         ),
                                       ),
