@@ -36,7 +36,15 @@ class _jsonifyState extends State<jsonify> {
     "KERALA": "kl",
     "DELHI": "dl",
     "MAHARASHTRA": "mh",
-    "KARNATAKA": "ka"
+    "KARNATAKA": "ka",
+    "ANDHRA PRADESH": "ap",
+    "TELANGANA": "tg",
+    "RAJASTHAN": "rj",
+    "GUJARAT": "gj",
+    "GOA": "ga",
+    "ORISSA": "or",
+    "HARYANA": "hr",
+    "ASSAM": "as"
   };
 
   FlatButton createButton(String stateName) {
@@ -73,6 +81,14 @@ class _jsonifyState extends State<jsonify> {
                   createButton('MAHARASHTRA'),
                   createButton('DELHI'),
                   createButton('KARNATAKA'),
+                  createButton('RAJASTHAN'),
+                  createButton('GUJARAT'),
+                  createButton('GOA'),
+                  createButton('ANDHRA PRADESH'),
+                  createButton('TELANGANA'),
+                  createButton('HARYANA'),
+                  createButton('ASSAM'),
+                  createButton('ORISSA'),
                 ],
               ),
             ],
@@ -134,36 +150,30 @@ class _jsonifyState extends State<jsonify> {
                               padding: const EdgeInsets.only(top: 25.0),
                               child: Column(
                                 children: <Widget>[
-                                  FittedBox(
-                                    fit: BoxFit.contain,
-                                    child: Container(
-                                      margin: EdgeInsets.only(bottom: 30.0),
-                                      child: Text(
-                                        'Affected count',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 30.0,
-                                        ),
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 30.0),
+                                    child: Text(
+                                      'Affected count',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 30.0,
                                       ),
                                     ),
                                   ),
 
-                                  FittedBox(
-                                    fit: BoxFit.contain,
-                                    child: Container(
-                                      margin: EdgeInsets.only(bottom: 18.0),
-                                      child: ShowUpAnimation(
-                                        delayStart: Duration(seconds: 2),
-                                        animationDuration: Duration(seconds: 3),
-                                        curve: Curves.decelerate,
-                                        direction: Direction.vertical,
-                                        offset: 0.5,
-                                        child: Text(
-                                          b,
-                                          style: TextStyle(
-                                            fontSize: 50.0,
-                                            color: Colors.orange,
-                                          ),
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 18.0),
+                                    child: ShowUpAnimation(
+                                      delayStart: Duration(seconds: 2),
+                                      animationDuration: Duration(seconds: 3),
+                                      curve: Curves.decelerate,
+                                      direction: Direction.vertical,
+                                      offset: 0.5,
+                                      child: Text(
+                                        b,
+                                        style: TextStyle(
+                                          fontSize: 50.0,
+                                          color: Colors.orange,
                                         ),
                                       ),
                                     ),
