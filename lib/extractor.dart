@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 //import 'count.dart';
 
-Future<String> fetchAlbum(String stateChoice) async {
+Future<Map<String, dynamic>> fetchAlbum() async {
 
   var url = 'https://api.covid19india.org/states_daily.json';
 
@@ -17,11 +17,9 @@ Future<String> fetchAlbum(String stateChoice) async {
     List b = jsonResponse['states_daily'] as List;
     //List list = b.map<StatesDaily>((json) => StatesDaily.fromJson(json)).toList();
 
-    return b[b.length-3][stateChoice];
+    return b[b.length-3];
 
   } else {
     print('Request failed with status: ${response.statusCode}.');
   }
-
-  return "Unable to fetch data";
 }

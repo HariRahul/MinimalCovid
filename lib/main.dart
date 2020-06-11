@@ -28,9 +28,7 @@ class jsonify extends StatefulWidget {
 }
 
 class _jsonifyState extends State<jsonify> {
-  String b = '';
-  String stateChoice = 'tn';
-  String stateTitle = 'TAMIL NADU';
+  Map <String, dynamic> b = {"":""};
   Map<String, String> m = {
     "TAMIL NADU": "tn",
     "KERALA": "kl",
@@ -47,6 +45,21 @@ class _jsonifyState extends State<jsonify> {
     "ASSAM": "as"
   };
 
+  String stateChoice = 'tn';
+  String stateTitle = 'TAMIL NADU';
+  String count = "";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAlbum().then((a) {
+      setState(() {
+        b = a;
+        count = b[stateChoice];
+      });
+    });
+  }
+
   FlatButton createButton(String stateName) {
     return FlatButton(
       child: Text(stateName),
@@ -54,6 +67,7 @@ class _jsonifyState extends State<jsonify> {
         setState(() {
           stateChoice = m[stateName];
           stateTitle = stateName;
+          count = b[stateChoice];
           Navigator.pop(context);
         });
       },
@@ -62,12 +76,6 @@ class _jsonifyState extends State<jsonify> {
 
   @override
   Widget build(BuildContext context) {
-    fetchAlbum(stateChoice).then((a) {
-      setState(() {
-        b = a;
-      });
-    });
-
     return SafeArea(
       child: Scaffold(
         drawer: Drawer(
@@ -106,7 +114,7 @@ class _jsonifyState extends State<jsonify> {
               child: Column(
                 children: <Widget>[
                   Expanded(
-                    flex: 3,
+                    flex: 2,
                     child: Container(
                       child: ShowUpAnimation(
                         child: Padding(
@@ -170,7 +178,7 @@ class _jsonifyState extends State<jsonify> {
                                       direction: Direction.vertical,
                                       offset: 0.5,
                                       child: Text(
-                                        b,
+                                        count,
                                         style: TextStyle(
                                           fontSize: 50.0,
                                           color: Colors.orange,
