@@ -28,7 +28,7 @@ class jsonify extends StatefulWidget {
 }
 
 class _jsonifyState extends State<jsonify> {
-  Map <String, dynamic> b = {"":""};
+  Map<String, dynamic> b = {"": ""};
   Map<String, String> m = {
     "TAMIL NADU": "tn",
     "KERALA": "kl",
@@ -168,7 +168,6 @@ class _jsonifyState extends State<jsonify> {
                                       ),
                                     ),
                                   ),
-
                                   Container(
                                     margin: EdgeInsets.only(bottom: 18.0),
                                     child: ShowUpAnimation(
@@ -201,6 +200,20 @@ class _jsonifyState extends State<jsonify> {
               child: AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
+                actions: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.refresh),
+                    color: Colors.white,
+                    onPressed: () {
+                      fetchAlbum().then((a) {
+                        setState(() {
+                          b = a;
+                          count = b[stateChoice];
+                        });
+                      });
+                    },
+                  ),
+                ],
               ),
             ),
           ],
