@@ -28,8 +28,8 @@ class jsonify extends StatefulWidget {
 }
 
 class _jsonifyState extends State<jsonify> {
-  Map<String, dynamic> b = {"": ""};
-  Map<String, String> m = {
+  Map<String, dynamic> parsedData = {"": ""};
+  Map<String, String> indiaStates = {
     "TAMIL NADU": "tn",
     "KERALA": "kl",
     "DELHI": "dl",
@@ -40,9 +40,32 @@ class _jsonifyState extends State<jsonify> {
     "RAJASTHAN": "rj",
     "GUJARAT": "gj",
     "GOA": "ga",
-    "ORISSA": "or",
+    "ODISHA": "or",
     "HARYANA": "hr",
-    "ASSAM": "as"
+    "ASSAM": "as",
+    "PUNJAB": "pb",
+    "UTTAR PRADESH": "up",
+    "MADHYA PRADESH": "mp",
+    "WEST BENGAL": "wb",
+    "BIHAR": "br",
+    "JAMMU AND KASHMIR": "jk",
+    "UTTARAKHAND": "ut",
+    "JHARKHAND": "jh",
+    "CHHATTISGARH": "ct",
+    "CHANDIGARH": "ch",
+    "TRIPURA": "tr",
+    "HIMACHAL PRADESH": "hp",
+    "LADAKH": "la",
+    "MANIPUR": "mn",
+    "PUDHUCHERRY":"py",
+    "NAGALAND": "nl",
+    "MIZORAM": "mz",
+    "ARUNACHAL PRADESH": "ar",
+    "SIKKIM": "sk",
+    "MEGHALAYA": "ml",
+    "ANDAMAN AND NICOBAR": "an",
+    "DAMAN AND DIU": "dd",
+    "DADRA AND NAGAR HAVELI": "dn"
   };
 
   String stateChoice = 'tn';
@@ -54,8 +77,8 @@ class _jsonifyState extends State<jsonify> {
     super.initState();
     fetchAlbum().then((a) {
       setState(() {
-        b = a;
-        count = b[stateChoice];
+        parsedData = a;
+        count = parsedData[stateChoice];
       });
     });
   }
@@ -65,9 +88,9 @@ class _jsonifyState extends State<jsonify> {
       child: Text(stateName),
       onPressed: () {
         setState(() {
-          stateChoice = m[stateName];
+          stateChoice = indiaStates[stateName];
           stateTitle = stateName;
-          count = b[stateChoice];
+          count = parsedData[stateChoice];
           Navigator.pop(context);
         });
       },
@@ -97,6 +120,29 @@ class _jsonifyState extends State<jsonify> {
                   createButton('HARYANA'),
                   createButton('ASSAM'),
                   createButton('ORISSA'),
+                  createButton('UTTAR PRADESH'),
+                  createButton('PUNJAB'),
+                  createButton('MADHYA PRADESH'),
+                  createButton('WEST BENGAL'),
+                  createButton('BIHAR'),
+                  createButton('JAMMU AND KASHMIR'),
+                  createButton('UTTARAKHAND'),
+                  createButton('JHARKHAND'),
+                  createButton('CHHATTISGARH'),
+                  createButton('CHANDIGARH'),
+                  createButton('TRIPURA'),
+                  createButton('HIMACHAL PRADESH'),
+                  createButton('LADAKH'),
+                  createButton('MANIPUR'),
+                  createButton('PUDHUCHERRY'),
+                  createButton('NAGALAND'),
+                  createButton('MIZORAM'),
+                  createButton('ARUNACHAL PRADESH'),
+                  createButton('SIKKIM'),
+                  createButton('MEGHALAYA'),
+                  createButton('ANDAMAN AND NICOBAR'),
+                  createButton('DAMAN AND DIU'),
+                  createButton('DADRA AND NAGAR HAVELI'),
                 ],
               ),
             ],
@@ -207,8 +253,8 @@ class _jsonifyState extends State<jsonify> {
                     onPressed: () {
                       fetchAlbum().then((a) {
                         setState(() {
-                          b = a;
-                          count = b[stateChoice];
+                          parsedData = a;
+                          count = parsedData[stateChoice];
                         });
                       });
                     },

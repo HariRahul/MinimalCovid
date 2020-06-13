@@ -87,6 +87,7 @@ class StatesDaily {
     return StatesDaily(
         an: json["an"],
         ap: json["ap"],
+        ar: json["ar"],
         as: json["as"],
         br: json["br"],
         ch: json["ch"],
