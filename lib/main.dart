@@ -66,7 +66,7 @@ class _jsonifyState extends State<jsonify> {
     "Andaman and Nicobar Islands": "an"
   };
   Map<String, dynamic> parsedDataDistrict = {"": ""};
-  List<String> stateDistricts = [''];
+  List<String> stateDistricts = [];
 
   String stateChoice = 'tn';
   String stateTitle = 'Tamil Nadu';
@@ -86,8 +86,15 @@ class _jsonifyState extends State<jsonify> {
       setState(() {
         parsedDataDistrict = a;
         parsedDataDistrict[stateTitle].forEach((key, value) => stateDistricts.add(key));
+        districtButtons(stateDistricts);
       });
     });
+  }
+
+  List<FlatButton> districtButtons(List<String> districts){
+    List<FlatButton> temporaryButtons=[];
+    districts.forEach((element) => temporaryButtons.add(createButtonDistricts(element)));
+    return temporaryButtons;
   }
 
   FlatButton createButton(String stateName) {
@@ -98,6 +105,22 @@ class _jsonifyState extends State<jsonify> {
           stateChoice = indiaStates[stateName];
           stateTitle = stateName;
           count = parsedData[stateChoice];
+          stateDistricts.clear();
+          parsedDataDistrict[stateTitle].forEach((key, value) => stateDistricts.add(key));
+          districtButtons(stateDistricts);
+          Navigator.pop(context);
+        });
+      },
+    );
+  }
+
+  FlatButton createButtonDistricts(String stateName) {
+    return FlatButton(
+      child: Text(stateName),
+      onPressed: () {
+        setState(() {
+          List<dynamic> data= parsedDataDistrict[stateTitle][stateName];
+          print(data[data.length-1]['confirmed']);
           Navigator.pop(context);
         });
       },
@@ -149,6 +172,10 @@ class _jsonifyState extends State<jsonify> {
                   createButton('Meghalaya'),
                   createButton('Andaman and Nicobar Islands')
                 ],
+              ),
+              ExpansionTile(
+                title: Center(child: Text('DISTRICTS')),
+                children: districtButtons(stateDistricts),
               ),
             ],
           ),
