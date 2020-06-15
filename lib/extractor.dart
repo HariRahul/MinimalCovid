@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 //import 'count.dart';
 
-Future<Map<String, dynamic>> fetchAlbum() async {
+Future<Map<String, dynamic>> fetchStates() async {
 
   var url = 'https://api.covid19india.org/states_daily.json';
 
@@ -18,6 +18,23 @@ Future<Map<String, dynamic>> fetchAlbum() async {
     //List list = b.map<StatesDaily>((json) => StatesDaily.fromJson(json)).toList();
 
     return b[b.length-3];
+
+  } else {
+    print('Request failed with status: ${response.statusCode}.');
+  }
+}
+
+Future<Map<String, dynamic>> fetchDistricts() async {
+
+  var url = 'https://api.covid19india.org/districts_daily.json';
+
+  var response = await http.get(url);
+
+  if (response.statusCode == 200) {
+
+    var jsonResponse = convert.jsonDecode(response.body);
+
+    return jsonResponse['districtsDaily'];
 
   } else {
     print('Request failed with status: ${response.statusCode}.');

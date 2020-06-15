@@ -65,6 +65,8 @@ class _jsonifyState extends State<jsonify> {
     "Meghalaya": "ml",
     "Andaman and Nicobar Islands": "an"
   };
+  Map<String, dynamic> parsedDataDistrict = {"": ""};
+  List<String> stateDistricts = [''];
 
   String stateChoice = 'tn';
   String stateTitle = 'Tamil Nadu';
@@ -73,10 +75,17 @@ class _jsonifyState extends State<jsonify> {
   @override
   void initState() {
     super.initState();
-    fetchAlbum().then((a) {
+    fetchStates().then((a) {
       setState(() {
         parsedData = a;
         count = parsedData[stateChoice];
+      });
+    });
+
+    fetchDistricts().then((a) {
+      setState(() {
+        parsedDataDistrict = a;
+        parsedDataDistrict[stateTitle].forEach((key, value) => stateDistricts.add(key));
       });
     });
   }
@@ -247,7 +256,7 @@ class _jsonifyState extends State<jsonify> {
                     icon: Icon(Icons.refresh),
                     color: Colors.white,
                     onPressed: () {
-                      fetchAlbum().then((a) {
+                      fetchStates().then((a) {
                         setState(() {
                           parsedData = a;
                           count = parsedData[stateChoice];
