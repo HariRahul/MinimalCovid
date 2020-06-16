@@ -70,7 +70,9 @@ class _jsonifyState extends State<jsonify> {
 
   String stateChoice = 'tn';
   String stateTitle = 'Tamil Nadu';
+  String districtName = '';
   String count = "";
+  int countD =0;
 
   @override
   void initState() {
@@ -87,6 +89,11 @@ class _jsonifyState extends State<jsonify> {
         parsedDataDistrict = a;
         parsedDataDistrict[stateTitle].forEach((key, value) => stateDistricts.add(key));
         districtButtons(stateDistricts);
+        districtName=stateDistricts[0];
+
+        List<dynamic> datas= parsedDataDistrict[stateTitle][districtName];
+        countD = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
+
       });
     });
   }
@@ -108,6 +115,11 @@ class _jsonifyState extends State<jsonify> {
           stateDistricts.clear();
           parsedDataDistrict[stateTitle].forEach((key, value) => stateDistricts.add(key));
           districtButtons(stateDistricts);
+
+          districtName=stateDistricts[0];
+          List<dynamic> datas1= parsedDataDistrict[stateTitle][districtName];
+          countD = datas1[datas1.length-1]['confirmed']-datas1[datas1.length-2]['confirmed'];
+
           Navigator.pop(context);
         });
       },
@@ -120,7 +132,9 @@ class _jsonifyState extends State<jsonify> {
       onPressed: () {
         setState(() {
           List<dynamic> data= parsedDataDistrict[stateTitle][stateName];
-          print(data[data.length-1]['confirmed']);
+//          print(data[data.length-1]['confirmed']);
+          districtName = stateName;
+          countD = data[data.length-1]['confirmed']-data[data.length-2]['confirmed'];
           Navigator.pop(context);
         });
       },
@@ -200,14 +214,27 @@ class _jsonifyState extends State<jsonify> {
                           child: Center(
                             child: FittedBox(
                               fit: BoxFit.contain,
-                              child: Text(
-                                stateTitle,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 50.0,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Kaushan',
-                                ),
+                              child: Column(
+                                children: <Widget>[
+                                  Text(
+                                    stateTitle,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 50.0,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Kaushan',
+                                    ),
+                                  ),
+                                  Text(
+                                    count,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 50.0,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Kaushan',
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -224,9 +251,14 @@ class _jsonifyState extends State<jsonify> {
                       padding: const EdgeInsets.all(12.0),
                       child: Container(
                         decoration: BoxDecoration(
+                          boxShadow: [BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 10.0,
+                            spreadRadius: 2.0,
+                          )],
                           color: Colors.white,
                           borderRadius: BorderRadius.all(
-                            Radius.circular(40.0),
+                            Radius.circular(25.0),
                           ),
                         ),
                         child: Center(
@@ -239,7 +271,7 @@ class _jsonifyState extends State<jsonify> {
                                   Container(
                                     margin: EdgeInsets.only(bottom: 30.0),
                                     child: Text(
-                                      'Affected count',
+                                      districtName,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 30.0,
@@ -248,18 +280,11 @@ class _jsonifyState extends State<jsonify> {
                                   ),
                                   Container(
                                     margin: EdgeInsets.only(bottom: 18.0),
-                                    child: ShowUpAnimation(
-                                      delayStart: Duration(seconds: 2),
-                                      animationDuration: Duration(seconds: 3),
-                                      curve: Curves.decelerate,
-                                      direction: Direction.vertical,
-                                      offset: 0.5,
-                                      child: Text(
-                                        count,
-                                        style: TextStyle(
-                                          fontSize: 50.0,
-                                          color: Colors.orange,
-                                        ),
+                                    child: Text(
+                                      countD.toString(),
+                                      style: TextStyle(
+                                        fontSize: 50.0,
+                                        color: Colors.orange,
                                       ),
                                     ),
                                   ),
