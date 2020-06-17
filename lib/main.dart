@@ -67,16 +67,62 @@ class _jsonifyState extends State<jsonify> {
   };
   Map<String, dynamic> parsedDataDistrict = {"": ""};
   List<String> stateDistricts = [];
-
   String stateChoice = 'tn';
   String stateTitle = 'Tamil Nadu';
   String districtName = '';
   String count = "";
   int countD =0;
 
+
+
+//  Map<String, dynamic> parsedData2 = {"": ""};
+//  String stateChoice2 = 'TN';
+//  Map<String, String> indiaStates2 = {
+//    "TN":"Tamil Nadu",
+//    "KL":"Kerala",
+//    "DL":"Delhi",
+//    "MH":"Maharashtra",
+//    "KA":"Karnataka",
+//    "AP":"Andhra Pradesh",
+//    "TG":"Telangana",
+//    "RJ":"Rajasthan",
+//    "GJ":"Gujarat",
+//    "GA":"Goa",
+//    "OR":"Odisha",
+//    "HR":"Haryana",
+//    "AS":"Assam",
+//    "PB":"Punjab",
+//    "UP":"Uttar Pradesh",
+//    "MP":"Madhya Pradesh",
+//    "WB":"West Bengal",
+//    "BR":"Bihar",
+//    "JK":"Jammu and Kashmir",
+//    "UT":"Uttarakhand",
+//    "JH":"Jharkhand",
+//    "CT":"Chhattisgarh",
+//    "CH":"Chandigarh",
+//    "TR":"Tripura",
+//    "HP":"Himachal Pradesh",
+//    "LA":"Ladakh",
+//    "MN":"Manipur",
+//    "PY":"Puducherry",
+//    "NL":"Nagaland",
+//    "MZ":"Mizoram",
+//    "AR":"Arunachal Pradesh",
+//    "SK":"Sikkim",
+//    "ML":"Meghalaya",
+//    "AN":"Andaman and Nicobar Islands"
+//  };
+//  String stateTitle2 = 'Tamil Nadu';
+//  int countState2 = 0;
+//  int countDistrict2 = 0;
+//  List<String> states=[];
+
+
   @override
   void initState() {
     super.initState();
+
     fetchStates().then((a) {
       setState(() {
         parsedData = a;
@@ -96,7 +142,22 @@ class _jsonifyState extends State<jsonify> {
 
       });
     });
+
+//    fetchData().then((value) {
+//      setState(() {
+//        parsedData2 = value;
+//        countState2 = parsedData2[stateChoice2]['delta']['confirmed'];
+//        indiaStates2.forEach((key, value) { });
+//      });
+//    });
   }
+
+//  List<FlatButton> stateButtons(){
+//    List<FlatButton> temporaryButtons=[];
+//    parsedData2.forEach((key, value) => temporaryButtons.add(createButtonDistricts(indiaStates2[key])));
+//    print(temporaryButtons[0].child);
+//    return temporaryButtons;
+//  }
 
   List<FlatButton> districtButtons(List<String> districts){
     List<FlatButton> temporaryButtons=[];

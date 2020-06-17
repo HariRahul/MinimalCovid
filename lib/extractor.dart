@@ -40,3 +40,20 @@ Future<Map<String, dynamic>> fetchDistricts() async {
     print('Request failed with status: ${response.statusCode}.');
   }
 }
+
+Future<Map<String, dynamic>> fetchData() async {
+
+  var url = 'https://api.covid19india.org/v3/data.json';
+
+  var response = await http.get(url);
+
+  if (response.statusCode == 200) {
+
+    var jsonResponse = convert.jsonDecode(response.body);
+
+    return jsonResponse;
+
+  } else {
+    print('Request failed with status: ${response.statusCode}.');
+  }
+}
