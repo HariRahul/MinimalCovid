@@ -10,10 +10,14 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    //Lock autorotate
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
+    //Set notification bar colour
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.black));
     return MaterialApp(
@@ -28,7 +32,7 @@ class jsonify extends StatefulWidget {
 }
 
 class _jsonifyState extends State<jsonify> {
-  Map<String, dynamic> parsedData = {"": ""};
+  Map<String, dynamic> parsedData = {};
   Map<String, String> indiaStates = {
     "Tamil Nadu": "tn",
     "Kerala": "kl",
@@ -65,58 +69,15 @@ class _jsonifyState extends State<jsonify> {
     "Meghalaya": "ml",
     "Andaman and Nicobar Islands": "an"
   };
-  Map<String, dynamic> parsedDataDistrict = {"": ""};
+  Map<String, dynamic> parsedDataDistrict = {};
   List<String> stateDistricts = [];
+  List<String> stateNames = [];
   String stateChoice = 'tn';
   String stateTitle = 'Tamil Nadu';
   String districtName = '';
-  String count = "";
-  int countD =0;
-
-
-
-//  Map<String, dynamic> parsedData2 = {"": ""};
-//  String stateChoice2 = 'TN';
-//  Map<String, String> indiaStates2 = {
-//    "TN":"Tamil Nadu",
-//    "KL":"Kerala",
-//    "DL":"Delhi",
-//    "MH":"Maharashtra",
-//    "KA":"Karnataka",
-//    "AP":"Andhra Pradesh",
-//    "TG":"Telangana",
-//    "RJ":"Rajasthan",
-//    "GJ":"Gujarat",
-//    "GA":"Goa",
-//    "OR":"Odisha",
-//    "HR":"Haryana",
-//    "AS":"Assam",
-//    "PB":"Punjab",
-//    "UP":"Uttar Pradesh",
-//    "MP":"Madhya Pradesh",
-//    "WB":"West Bengal",
-//    "BR":"Bihar",
-//    "JK":"Jammu and Kashmir",
-//    "UT":"Uttarakhand",
-//    "JH":"Jharkhand",
-//    "CT":"Chhattisgarh",
-//    "CH":"Chandigarh",
-//    "TR":"Tripura",
-//    "HP":"Himachal Pradesh",
-//    "LA":"Ladakh",
-//    "MN":"Manipur",
-//    "PY":"Puducherry",
-//    "NL":"Nagaland",
-//    "MZ":"Mizoram",
-//    "AR":"Arunachal Pradesh",
-//    "SK":"Sikkim",
-//    "ML":"Meghalaya",
-//    "AN":"Andaman and Nicobar Islands"
-//  };
-//  String stateTitle2 = 'Tamil Nadu';
-//  int countState2 = 0;
-//  int countDistrict2 = 0;
-//  List<String> states=[];
+  String countState = "";
+  int countDistrict =0;
+  List<dynamic> datas=[];
 
 
   @override
@@ -126,7 +87,9 @@ class _jsonifyState extends State<jsonify> {
     fetchStates().then((a) {
       setState(() {
         parsedData = a;
-        count = parsedData[stateChoice];
+        countState = parsedData[stateChoice];
+
+        indiaStates.forEach((key, value) {stateNames.add(key);});
       });
     });
 
@@ -134,30 +97,23 @@ class _jsonifyState extends State<jsonify> {
       setState(() {
         parsedDataDistrict = a;
         parsedDataDistrict[stateTitle].forEach((key, value) => stateDistricts.add(key));
+
         districtButtons(stateDistricts);
         districtName=stateDistricts[0];
 
-        List<dynamic> datas= parsedDataDistrict[stateTitle][districtName];
-        countD = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
+        datas= parsedDataDistrict[stateTitle][districtName];
+        countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
 
       });
     });
-
-//    fetchData().then((value) {
-//      setState(() {
-//        parsedData2 = value;
-//        countState2 = parsedData2[stateChoice2]['delta']['confirmed'];
-//        indiaStates2.forEach((key, value) { });
-//      });
-//    });
   }
 
-//  List<FlatButton> stateButtons(){
-//    List<FlatButton> temporaryButtons=[];
-//    parsedData2.forEach((key, value) => temporaryButtons.add(createButtonDistricts(indiaStates2[key])));
-//    print(temporaryButtons[0].child);
-//    return temporaryButtons;
-//  }
+  List<FlatButton> stateButtons(){
+    List<FlatButton> temporaryButtons=[];
+    stateNames.forEach((element) => temporaryButtons.add(createButton(element)));
+    return temporaryButtons;
+  }
+
 
   List<FlatButton> districtButtons(List<String> districts){
     List<FlatButton> temporaryButtons=[];
@@ -172,14 +128,16 @@ class _jsonifyState extends State<jsonify> {
         setState(() {
           stateChoice = indiaStates[stateName];
           stateTitle = stateName;
-          count = parsedData[stateChoice];
+          countState = parsedData[stateChoice];
           stateDistricts.clear();
           parsedDataDistrict[stateTitle].forEach((key, value) => stateDistricts.add(key));
           districtButtons(stateDistricts);
 
           districtName=stateDistricts[0];
-          List<dynamic> datas1= parsedDataDistrict[stateTitle][districtName];
-          countD = datas1[datas1.length-1]['confirmed']-datas1[datas1.length-2]['confirmed'];
+
+          datas.clear();
+          datas= parsedDataDistrict[stateTitle][districtName];
+          countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
 
           Navigator.pop(context);
         });
@@ -192,10 +150,10 @@ class _jsonifyState extends State<jsonify> {
       child: Text(stateName),
       onPressed: () {
         setState(() {
-          List<dynamic> data= parsedDataDistrict[stateTitle][stateName];
-//          print(data[data.length-1]['confirmed']);
+          datas.clear();
+          datas= parsedDataDistrict[stateTitle][stateName];
           districtName = stateName;
-          countD = data[data.length-1]['confirmed']-data[data.length-2]['confirmed'];
+          countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
           Navigator.pop(context);
         });
       },
@@ -211,42 +169,7 @@ class _jsonifyState extends State<jsonify> {
             children: <Widget>[
               ExpansionTile(
                 title: Center(child: Text("STATES")),
-                children: <Widget>[
-                  createButton('Tamil Nadu'),
-                  createButton('Kerala'),
-                  createButton('Maharashtra'),
-                  createButton('Delhi'),
-                  createButton('Karnataka'),
-                  createButton('Rajasthan'),
-                  createButton('Gujarat'),
-                  createButton('Goa'),
-                  createButton('Andhra Pradesh'),
-                  createButton('Telangana'),
-                  createButton('Haryana'),
-                  createButton('Assam'),
-                  createButton('Odisha'),
-                  createButton('Uttar Pradesh'),
-                  createButton('Punjab'),
-                  createButton('Madhya Pradesh'),
-                  createButton('West Bengal'),
-                  createButton('Bihar'),
-                  createButton('Jammu and Kashmir'),
-                  createButton('Uttarakhand'),
-                  createButton('Jharkhand'),
-                  createButton('Chhattisgarh'),
-                  createButton('Chandigarh'),
-                  createButton('Tripura'),
-                  createButton('Himachal Pradesh'),
-                  createButton('Ladakh'),
-                  createButton('Manipur'),
-                  createButton('Puducherry'),
-                  createButton('Nagaland'),
-                  createButton('Mizoram'),
-                  createButton('Arunachal Pradesh'),
-                  createButton('Sikkim'),
-                  createButton('Meghalaya'),
-                  createButton('Andaman and Nicobar Islands')
-                ],
+                children: stateButtons(),
               ),
               ExpansionTile(
                 title: Center(child: Text('DISTRICTS')),
@@ -287,7 +210,7 @@ class _jsonifyState extends State<jsonify> {
                                     ),
                                   ),
                                   Text(
-                                    count,
+                                    countState,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 50.0,
@@ -342,7 +265,7 @@ class _jsonifyState extends State<jsonify> {
                                   Container(
                                     margin: EdgeInsets.only(bottom: 18.0),
                                     child: Text(
-                                      countD.toString(),
+                                      countDistrict.toString(),
                                       style: TextStyle(
                                         fontSize: 50.0,
                                         color: Colors.orange,
@@ -372,7 +295,21 @@ class _jsonifyState extends State<jsonify> {
                       fetchStates().then((a) {
                         setState(() {
                           parsedData = a;
-                          count = parsedData[stateChoice];
+                          countState = parsedData[stateChoice];
+                        });
+                      });
+                      fetchDistricts().then((a) {
+                        setState(() {
+                          parsedDataDistrict = a;
+                          parsedDataDistrict[stateTitle].forEach((key, value) => stateDistricts.add(key));
+
+                          districtButtons(stateDistricts);
+                          districtName=stateDistricts[0];
+
+                          datas.clear();
+                          datas= parsedDataDistrict[stateTitle][districtName];
+                          countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
+
                         });
                       });
                     },
