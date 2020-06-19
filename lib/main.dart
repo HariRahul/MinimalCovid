@@ -102,7 +102,6 @@ class _jsonifyState extends State<jsonify> {
         districtName=stateDistricts[0];
 
         datas = parsedDataDistrict[stateTitle][districtName];
-        print(datas);
         countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
 
       });
@@ -140,7 +139,6 @@ class _jsonifyState extends State<jsonify> {
           districtName=stateDistricts[0];
 
           datas= parsedDataDistrict[stateTitle][districtName];
-          print(parsedDataDistrict[stateTitle]);
           countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
 
           Navigator.pop(context);
