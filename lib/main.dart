@@ -101,7 +101,8 @@ class _jsonifyState extends State<jsonify> {
         districtButtons(stateDistricts);
         districtName=stateDistricts[0];
 
-        datas= parsedDataDistrict[stateTitle][districtName];
+        datas = parsedDataDistrict[stateTitle][districtName];
+        print(datas);
         countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
 
       });
@@ -127,16 +128,19 @@ class _jsonifyState extends State<jsonify> {
       onPressed: () {
         setState(() {
           stateChoice = indiaStates[stateName];
+
           stateTitle = stateName;
+
           countState = parsedData[stateChoice];
+
           stateDistricts.clear();
           parsedDataDistrict[stateTitle].forEach((key, value) => stateDistricts.add(key));
           districtButtons(stateDistricts);
 
           districtName=stateDistricts[0];
 
-          datas.clear();
           datas= parsedDataDistrict[stateTitle][districtName];
+          print(parsedDataDistrict[stateTitle]);
           countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
 
           Navigator.pop(context);
@@ -150,7 +154,6 @@ class _jsonifyState extends State<jsonify> {
       child: Text(stateName),
       onPressed: () {
         setState(() {
-          datas.clear();
           datas= parsedDataDistrict[stateTitle][stateName];
           districtName = stateName;
           countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
