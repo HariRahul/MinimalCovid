@@ -189,97 +189,141 @@ class _jsonifyState extends State<jsonify> {
                 ),
               ),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      child: ShowUpAnimation(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Center(
-                            child: FittedBox(
-                              fit: BoxFit.contain,
-                              child: Column(
-                                children: <Widget>[
-                                  Text(
-                                    stateTitle,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 50.0,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Kaushan',
-                                    ),
-                                  ),
-                                  Text(
-                                    countState,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 50.0,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Kaushan',
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        animationDuration: Duration(seconds: 2),
-                        delayStart: Duration(seconds: 1),
-                        curve: Curves.decelerate,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 10.0,
-                            spreadRadius: 2.0,
-                          )],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(25.0),
-                          ),
-                        ),
+                  Container(
+                    child: ShowUpAnimation(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
                         child: Center(
                           child: FittedBox(
                             fit: BoxFit.contain,
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 25.0),
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 30.0),
-                                    child: Text(
-                                      districtName,
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 30.0,
-                                      ),
-                                    ),
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  stateTitle,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 50.0,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Kaushan',
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 18.0),
-                                    child: Text(
-                                      countDistrict.toString(),
-                                      style: TextStyle(
-                                        fontSize: 50.0,
-                                        color: Colors.orange,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
+                      animationDuration: Duration(seconds: 2),
+                      delayStart: Duration(seconds: 1),
+                      curve: Curves.decelerate,
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(25.0),
+                            ),
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left:20.0, right: 20.0),
+                                    child: Container(
+                                      child: Text(
+                                        'Total',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 30.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left:20.0, right: 20.0),
+                                    child: Container(
+                                      child: Text(
+                                        countState,
+                                        style: TextStyle(
+                                          fontSize: 50.0,
+                                          color: Colors.orange,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(25.0),
+                            ),
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left:20.0, right: 20.0),
+                                    child: Container(
+                                      child: Text(
+                                        districtName,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 30.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left:20.0, right: 20.0),
+                                    child: Container(
+                                      child: Text(
+                                        countDistrict.toString(),
+                                        style: TextStyle(
+                                          fontSize: 50.0,
+                                          color: Colors.orange,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
