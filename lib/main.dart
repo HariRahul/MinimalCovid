@@ -10,7 +10,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     //Lock autorotate
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -61,7 +60,7 @@ class _jsonifyState extends State<jsonify> {
     "Himachal Pradesh": "hp",
     "Ladakh": "la",
     "Manipur": "mn",
-    "Puducherry":"py",
+    "Puducherry": "py",
     "Nagaland": "nl",
     "Mizoram": "mz",
     "Arunachal Pradesh": "ar",
@@ -72,13 +71,13 @@ class _jsonifyState extends State<jsonify> {
   Map<String, dynamic> parsedDataDistrict = {};
   List<String> stateDistricts = [];
   List<String> stateNames = [];
+  String dateState = '';
   String stateChoice = 'tn';
   String stateTitle = 'Tamil Nadu';
   String districtName = '';
   String countState = "";
-  int countDistrict =0;
-  List<dynamic> datas=[];
-
+  int countDistrict = 0;
+  List<dynamic> datas = [];
 
   @override
   void initState() {
@@ -88,36 +87,41 @@ class _jsonifyState extends State<jsonify> {
       setState(() {
         parsedData = a;
         countState = parsedData[stateChoice];
+        dateState = parsedData['date'];
 
-        indiaStates.forEach((key, value) {stateNames.add(key);});
+        indiaStates.forEach((key, value) {
+          stateNames.add(key);
+        });
       });
     });
 
     fetchDistricts().then((a) {
       setState(() {
         parsedDataDistrict = a;
-        parsedDataDistrict[stateTitle].forEach((key, value) => stateDistricts.add(key));
+        parsedDataDistrict[stateTitle]
+            .forEach((key, value) => stateDistricts.add(key));
 
         districtButtons(stateDistricts);
-        districtName=stateDistricts[0];
+        districtName = stateDistricts[0];
 
         datas = parsedDataDistrict[stateTitle][districtName];
-        countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
 
+        countDistrict = datas[datas.length - 2]['confirmed'];
       });
     });
   }
 
-  List<FlatButton> stateButtons(){
-    List<FlatButton> temporaryButtons=[];
-    stateNames.forEach((element) => temporaryButtons.add(createButton(element)));
+  List<FlatButton> stateButtons() {
+    List<FlatButton> temporaryButtons = [];
+    stateNames
+        .forEach((element) => temporaryButtons.add(createButton(element)));
     return temporaryButtons;
   }
 
-
-  List<FlatButton> districtButtons(List<String> districts){
-    List<FlatButton> temporaryButtons=[];
-    districts.forEach((element) => temporaryButtons.add(createButtonDistricts(element)));
+  List<FlatButton> districtButtons(List<String> districts) {
+    List<FlatButton> temporaryButtons = [];
+    districts.forEach(
+        (element) => temporaryButtons.add(createButtonDistricts(element)));
     return temporaryButtons;
   }
 
@@ -133,13 +137,14 @@ class _jsonifyState extends State<jsonify> {
           countState = parsedData[stateChoice];
 
           stateDistricts.clear();
-          parsedDataDistrict[stateTitle].forEach((key, value) => stateDistricts.add(key));
+          parsedDataDistrict[stateTitle]
+              .forEach((key, value) => stateDistricts.add(key));
           districtButtons(stateDistricts);
 
-          districtName=stateDistricts[0];
+          districtName = stateDistricts[0];
 
-          datas= parsedDataDistrict[stateTitle][districtName];
-          countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
+          datas = parsedDataDistrict[stateTitle][districtName];
+          countDistrict = datas[datas.length - 1]['confirmed'];
 
           Navigator.pop(context);
         });
@@ -152,9 +157,9 @@ class _jsonifyState extends State<jsonify> {
       child: Text(stateName),
       onPressed: () {
         setState(() {
-          datas= parsedDataDistrict[stateTitle][stateName];
+          datas = parsedDataDistrict[stateTitle][stateName];
           districtName = stateName;
-          countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
+          countDistrict = datas[datas.length - 1]['confirmed'];
           Navigator.pop(context);
         });
       },
@@ -209,6 +214,16 @@ class _jsonifyState extends State<jsonify> {
                                     fontFamily: 'Kaushan',
                                   ),
                                 ),
+                                SizedBox(height: 10.0),
+                                Text(
+                                  dateState,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25.0,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Kaushan',
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -239,7 +254,8 @@ class _jsonifyState extends State<jsonify> {
                                 FittedBox(
                                   fit: BoxFit.contain,
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left:20.0, right: 20.0),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, right: 20.0),
                                     child: Container(
                                       child: Text(
                                         'Total',
@@ -254,7 +270,8 @@ class _jsonifyState extends State<jsonify> {
                                 FittedBox(
                                   fit: BoxFit.contain,
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left:20.0, right: 20.0),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, right: 20.0),
                                     child: Container(
                                       child: Text(
                                         countState,
@@ -291,7 +308,8 @@ class _jsonifyState extends State<jsonify> {
                                 FittedBox(
                                   fit: BoxFit.contain,
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left:20.0, right: 20.0),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, right: 20.0),
                                     child: Container(
                                       child: Text(
                                         districtName,
@@ -306,7 +324,8 @@ class _jsonifyState extends State<jsonify> {
                                 FittedBox(
                                   fit: BoxFit.contain,
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left:20.0, right: 20.0),
+                                    padding: const EdgeInsets.only(
+                                        left: 20.0, right: 20.0),
                                     child: Container(
                                       child: Text(
                                         countDistrict.toString(),
@@ -346,15 +365,16 @@ class _jsonifyState extends State<jsonify> {
                       fetchDistricts().then((a) {
                         setState(() {
                           parsedDataDistrict = a;
-                          parsedDataDistrict[stateTitle].forEach((key, value) => stateDistricts.add(key));
+                          parsedDataDistrict[stateTitle]
+                              .forEach((key, value) => stateDistricts.add(key));
 
                           districtButtons(stateDistricts);
-                          districtName=stateDistricts[0];
+                          districtName = stateDistricts[0];
 
                           datas.clear();
-                          datas= parsedDataDistrict[stateTitle][districtName];
-                          countDistrict = datas[datas.length-1]['confirmed']-datas[datas.length-2]['confirmed'];
-
+                          datas = parsedDataDistrict[stateTitle][districtName];
+                          countDistrict = datas[datas.length - 1]['confirmed'] -
+                              datas[datas.length - 2]['confirmed'];
                         });
                       });
                     },
