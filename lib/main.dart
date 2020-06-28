@@ -197,41 +197,36 @@ class _jsonifyState extends State<jsonify> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Container(
-                    child: ShowUpAnimation(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Center(
-                          child: FittedBox(
-                            fit: BoxFit.contain,
-                            child: Column(
-                              children: <Widget>[
-                                Text(
-                                  stateTitle,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 50.0,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Kaushan',
-                                  ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Center(
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                stateTitle,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 50.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Kaushan',
                                 ),
-                                SizedBox(height: 10.0),
-                                Text(
-                                  dateState,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 25.0,
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: 'Kaushan',
-                                  ),
+                              ),
+                              SizedBox(height: 10.0),
+                              Text(
+                                dateState,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25.0,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Kaushan',
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                      animationDuration: Duration(seconds: 2),
-                      delayStart: Duration(seconds: 1),
-                      curve: Curves.decelerate,
                     ),
                   ),
                   Row(
@@ -360,6 +355,7 @@ class _jsonifyState extends State<jsonify> {
                         setState(() {
                           parsedData = a;
                           countState = parsedData[stateChoice];
+                          dateState = parsedData['date'];
                         });
                       });
                       fetchDistricts().then((a) {
@@ -371,9 +367,8 @@ class _jsonifyState extends State<jsonify> {
                           districtButtons(stateDistricts);
                           districtName = stateDistricts[0];
 
-                          datas.clear();
                           datas = parsedDataDistrict[stateTitle][districtName];
-                          countDistrict = datas[datas.length - 1]['confirmed'] -
+                          countDistrict =
                               datas[datas.length - 2]['confirmed'];
                         });
                       });

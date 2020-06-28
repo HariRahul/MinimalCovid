@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="json_parse"
+        android:label="Covid19_Count"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
