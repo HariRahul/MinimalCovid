@@ -95,20 +95,20 @@ class _jsonifyState extends State<jsonify> {
       });
     });
 
-    fetchDistricts().then((a) {
-      setState(() {
-        parsedDataDistrict = a;
-        parsedDataDistrict[stateTitle]
-            .forEach((key, value) => stateDistricts.add(key));
-
-        districtButtons(stateDistricts);
-        districtName = stateDistricts[0];
-
-        datas = parsedDataDistrict[stateTitle][districtName];
-
-        countDistrict = datas[datas.length - 2]['confirmed'];
-      });
-    });
+//    fetchDistricts().then((a) {
+//      setState(() {
+//        parsedDataDistrict = a;
+//        parsedDataDistrict[stateTitle]
+//            .forEach((key, value) => stateDistricts.add(key));
+//
+//        districtButtons(stateDistricts);
+//        districtName = stateDistricts[0];
+//
+//        datas = parsedDataDistrict[stateTitle][districtName];
+//
+//        countDistrict = datas[datas.length - 2]['confirmed'];
+//      });
+//    });
   }
 
   List<FlatButton> stateButtons() {
@@ -118,12 +118,12 @@ class _jsonifyState extends State<jsonify> {
     return temporaryButtons;
   }
 
-  List<FlatButton> districtButtons(List<String> districts) {
-    List<FlatButton> temporaryButtons = [];
-    districts.forEach(
-        (element) => temporaryButtons.add(createButtonDistricts(element)));
-    return temporaryButtons;
-  }
+//  List<FlatButton> districtButtons(List<String> districts) {
+//    List<FlatButton> temporaryButtons = [];
+//    districts.forEach(
+//        (element) => temporaryButtons.add(createButtonDistricts(element)));
+//    return temporaryButtons;
+//  }
 
   FlatButton createButton(String stateName) {
     return FlatButton(
@@ -136,15 +136,15 @@ class _jsonifyState extends State<jsonify> {
 
           countState = parsedData[stateChoice];
 
-          stateDistricts.clear();
-          parsedDataDistrict[stateTitle]
-              .forEach((key, value) => stateDistricts.add(key));
-          districtButtons(stateDistricts);
+//          stateDistricts.clear();
+//          parsedDataDistrict[stateTitle]
+//              .forEach((key, value) => stateDistricts.add(key));
+//          districtButtons(stateDistricts);
 
-          districtName = stateDistricts[0];
+//          districtName = stateDistricts[0];
 
-          datas = parsedDataDistrict[stateTitle][districtName];
-          countDistrict = datas[datas.length - 1]['confirmed'];
+//          datas = parsedDataDistrict[stateTitle][districtName];
+//          countDistrict = datas[datas.length - 1]['confirmed'];
 
           Navigator.pop(context);
         });
@@ -152,19 +152,19 @@ class _jsonifyState extends State<jsonify> {
     );
   }
 
-  FlatButton createButtonDistricts(String stateName) {
-    return FlatButton(
-      child: Text(stateName),
-      onPressed: () {
-        setState(() {
-          datas = parsedDataDistrict[stateTitle][stateName];
-          districtName = stateName;
-          countDistrict = datas[datas.length - 1]['confirmed'];
-          Navigator.pop(context);
-        });
-      },
-    );
-  }
+//  FlatButton createButtonDistricts(String stateName) {
+//    return FlatButton(
+//      child: Text(stateName),
+//      onPressed: () {
+//        setState(() {
+//          datas = parsedDataDistrict[stateTitle][stateName];
+//          districtName = stateName;
+//          countDistrict = datas[datas.length - 1]['confirmed'];
+//          Navigator.pop(context);
+//        });
+//      },
+//    );
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -177,10 +177,10 @@ class _jsonifyState extends State<jsonify> {
                 title: Center(child: Text("STATES")),
                 children: stateButtons(),
               ),
-              ExpansionTile(
-                title: Center(child: Text('DISTRICTS')),
-                children: districtButtons(stateDistricts),
-              ),
+//              ExpansionTile(
+//                title: Center(child: Text('DISTRICTS')),
+//                children: districtButtons(stateDistricts),
+//              ),
             ],
           ),
         ),
@@ -283,60 +283,60 @@ class _jsonifyState extends State<jsonify> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: 100.0,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(25.0),
-                            ),
-                          ),
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                FittedBox(
-                                  fit: BoxFit.contain,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20.0, right: 20.0),
-                                    child: Container(
-                                      child: Text(
-                                        districtName,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 30.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                FittedBox(
-                                  fit: BoxFit.contain,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20.0, right: 20.0),
-                                    child: Container(
-                                      child: Text(
-                                        countDistrict.toString(),
-                                        style: TextStyle(
-                                          fontSize: 50.0,
-                                          color: Colors.orange,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+//                      SizedBox(
+//                        width: 10.0,
+//                      ),
+//                      Expanded(
+//                        flex: 1,
+//                        child: Container(
+//                          height: 100.0,
+//                          decoration: BoxDecoration(
+//                            color: Colors.white,
+//                            borderRadius: BorderRadius.all(
+//                              Radius.circular(25.0),
+//                            ),
+//                          ),
+//                          child: Center(
+//                            child: Column(
+//                              mainAxisAlignment: MainAxisAlignment.center,
+//                              children: <Widget>[
+//                                FittedBox(
+//                                  fit: BoxFit.contain,
+//                                  child: Padding(
+//                                    padding: const EdgeInsets.only(
+//                                        left: 20.0, right: 20.0),
+//                                    child: Container(
+//                                      child: Text(
+//                                        districtName,
+//                                        style: TextStyle(
+//                                          color: Colors.black,
+//                                          fontSize: 30.0,
+//                                        ),
+//                                      ),
+//                                    ),
+//                                  ),
+//                                ),
+//                                FittedBox(
+//                                  fit: BoxFit.contain,
+//                                  child: Padding(
+//                                    padding: const EdgeInsets.only(
+//                                        left: 20.0, right: 20.0),
+//                                    child: Container(
+//                                      child: Text(
+//                                        countDistrict.toString(),
+//                                        style: TextStyle(
+//                                          fontSize: 50.0,
+//                                          color: Colors.orange,
+//                                        ),
+//                                      ),
+//                                    ),
+//                                  ),
+//                                ),
+//                              ],
+//                            ),
+//                          ),
+//                        ),
+//                      ),
                     ],
                   ),
                 ],
@@ -358,20 +358,20 @@ class _jsonifyState extends State<jsonify> {
                           dateState = parsedData['date'];
                         });
                       });
-                      fetchDistricts().then((a) {
-                        setState(() {
-                          parsedDataDistrict = a;
-                          parsedDataDistrict[stateTitle]
-                              .forEach((key, value) => stateDistricts.add(key));
-
-                          districtButtons(stateDistricts);
-                          districtName = stateDistricts[0];
-
-                          datas = parsedDataDistrict[stateTitle][districtName];
-                          countDistrict =
-                              datas[datas.length - 2]['confirmed'];
-                        });
-                      });
+//                      fetchDistricts().then((a) {
+//                        setState(() {
+//                          parsedDataDistrict = a;
+//                          parsedDataDistrict[stateTitle]
+//                              .forEach((key, value) => stateDistricts.add(key));
+//
+//                          districtButtons(stateDistricts);
+//                          districtName = stateDistricts[0];
+//
+//                          datas = parsedDataDistrict[stateTitle][districtName];
+//                          countDistrict =
+//                              datas[datas.length - 2]['confirmed'];
+//                        });
+//                      });
                     },
                   ),
                 ],
